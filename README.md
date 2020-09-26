@@ -2,7 +2,7 @@ Status:
 
 On master :
 
-To entities with one to one relation. When relatin is bi-directional throuht if statement:      
+- To entities with one to one relation. When relatin is bi-directional throuht if statement:      
      
         public void setAddress(Address address) {        
           this.address = address; 
@@ -11,11 +11,11 @@ To entities with one to one relation. When relatin is bi-directional throuht if 
             }
         }
     
- java.lang.StackOverflowError occures.
+ - java.lang.StackOverflowError occures.
   
- Implementation of PersonFacade and PersonResource with the corresponding tests.
+ - Implementation of PersonFacade and PersonResource with the corresponding tests.
   
- Implementation of two custom exceptions with the corresponding negativ tests.
+ - Implementation of two custom exceptions with the corresponding negativ tests.
     
     
 
