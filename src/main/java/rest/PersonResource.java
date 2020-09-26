@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import dto.PersonDTO;
 import dto.PersonsDTO;
+import entities.Person;
 import exceptions.MissingInputException;
 import exceptions.PersonNotFoundException;
 import facades.PersonFacade;
@@ -94,9 +95,9 @@ public class PersonResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public String addNewPerson(String PersonJson) throws MissingInputException {
-        PersonDTO newPerson = GSON.fromJson(PersonJson, PersonDTO.class);
+        Person newPerson = GSON.fromJson(PersonJson, Person.class);
         
-        PersonDTO addedPerson = FACADE.addPerson(newPerson.getfName(), newPerson.getlName(), newPerson.getPhone(), newPerson.getAddress());
+        PersonDTO addedPerson = FACADE.addPerson(newPerson.getFirstName(), newPerson.getLastName(), newPerson.getPhone(), newPerson.getAddress());
         
         
         return new Gson().toJson(addedPerson);

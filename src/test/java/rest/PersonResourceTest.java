@@ -180,9 +180,11 @@ public class PersonResourceTest {
 
     @Test
     public void testAddNewPerson() {
+        Person person = new Person("Yes","No","Why",new Date(), new Date());
+        person.setAddress(new Address ("a","B","c"));
         given()
                 .contentType("application/json")
-                .body(GSON.toJson(new PersonDTO("Yes","No","Why",new Address ("a","B","c"))))
+                .body(GSON.toJson(person))
                 .when()
                 .post("/person")
                 .then()

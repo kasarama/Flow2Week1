@@ -36,7 +36,10 @@ public class PersonFacade implements IPersonFacade {
     public PersonDTO addPerson(String fName, String lName, String phone, Address address) throws MissingInputException {
         if (fName == null || lName == null) {
             throw new MissingInputException("First Name and/or Last Name is missing");
-        }
+        } else
+        if (address ==  null) {
+            throw new MissingInputException("Address is missing");
+        } else {
         EntityManager em = emf.createEntityManager();
         Person p = new Person(fName, lName, phone, new Date(), new Date());
         p.setAddress(address);
@@ -49,6 +52,7 @@ public class PersonFacade implements IPersonFacade {
             em.close();
         }
         return new PersonDTO(p);
+        }
     }
 
     @Override

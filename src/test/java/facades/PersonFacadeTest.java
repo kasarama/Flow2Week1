@@ -96,7 +96,7 @@ public class PersonFacadeTest {
     public void testDeletePerson() throws PersonNotFoundException {
         PersonDTO pDTO = facade.deletePerson(p1.getId());
         assertTrue(pDTO.getPhone().equals("1236587"));
-        assertTrue(pDTO.getAddress().getCity().equals("Oslo"));
+        assertTrue(pDTO.getCity() .equals("Oslo"));
 
     }
 
