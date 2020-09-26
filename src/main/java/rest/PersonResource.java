@@ -95,18 +95,18 @@ public class PersonResource {
     @Produces(MediaType.APPLICATION_JSON)
     public String addNewPerson(String PersonJson) throws MissingInputException {
         PersonDTO newPerson = GSON.fromJson(PersonJson, PersonDTO.class);
-        System.out.println("1");
+        
         PersonDTO addedPerson = FACADE.addPerson(newPerson.getfName(), newPerson.getlName(), newPerson.getPhone(), newPerson.getAddress());
-        System.out.println("2:"+addedPerson.getAddress().getCity()+"  "+addedPerson.getfName() );
-        System.out.println("to json: "+GSON.toJson(addedPerson));
-        return GSON.toJson(addedPerson);
+        
+        
+        return new Gson().toJson(addedPerson);
     }
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{id}")
-    public String editPerson(String personJSON, @PathParam("id") int id) throws PersonNotFoundException {
+    public String editPerson(String personJSON, @PathParam("id") int id) throws PersonNotFoundException, MissingInputException {
         PersonDTO dto = GSON.fromJson(personJSON, PersonDTO.class);
         dto.setId(id);
         PersonDTO edited = FACADE.editPerson(dto);

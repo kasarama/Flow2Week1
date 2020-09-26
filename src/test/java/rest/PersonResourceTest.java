@@ -50,6 +50,7 @@ public class PersonResourceTest {
 
     private Person p1 = new Person("Magda", "Wawrzak", "123123", new Date(), new Date());
     private Person p2 = new Person("Hanna", "Zofia", "33", new Date(), new Date());
+    
 
     static HttpServer startServer() {
         ResourceConfig rc = ResourceConfig.forApplication(new ApplicationConfig());
@@ -80,6 +81,8 @@ public class PersonResourceTest {
     @BeforeEach
     public void setUp() {
         EntityManager em = emf.createEntityManager();
+        p1.setAddress(new Address("Alle","123","CPH"));
+        p2.setAddress(new Address("Street","321","HPC"));
 
         try {
             em.getTransaction().begin();
@@ -91,7 +94,7 @@ public class PersonResourceTest {
             em.close();
         }
     }
-/*
+
     @Test
     public void testServerIsUp() {
         System.out.println("Testing is server UP");
@@ -101,7 +104,7 @@ public class PersonResourceTest {
                 .then()
                 .statusCode(200);
     }
-*/
+
     
     @Test
     public void testDemo() throws Exception {
@@ -163,6 +166,7 @@ public class PersonResourceTest {
 
     @Test
     public void testDeleteById() {
+        System.out.println("Rst test delete");
         given()
                 .contentType("application/json")
                 .when()
@@ -185,6 +189,33 @@ public class PersonResourceTest {
                 .body("fName", equalTo("Yes"));
 
     }
+    
+    @Test
+    public void negativTestAddNewPersonF() {
+        given()
+                .contentType("application/json")
+                .body(GSON.toJson(new PersonDTO(null,"No","Why",new Address ("a","B","c"))))
+                .when()
+                .post("/person")
+                .then()
+                .body("message", equalTo("First Name and/or Last Name is missing"))
+                .body("code", equalTo(400)
+                );
+
+    }
+    @Test
+    public void negativTestAddNewPersonL() {
+        given()
+                .contentType("application/json")
+                .body(GSON.toJson(new PersonDTO("Yea",null,"Why",new Address ("a","B","c"))))
+                .when()
+                .post("/person")
+                .then()
+                .body("message", equalTo("First Name and/or Last Name is missing"))
+                .body("code", equalTo(400)
+                );
+
+    }
 
     @Test
     public void testEditPerson() {
@@ -199,6 +230,21 @@ public class PersonResourceTest {
                 .body("lName", equalTo(newPerson.getlName()))
                 .body("phone", equalTo(newPerson.getPhone()))
                 .body("fName", equalTo(newPerson.getfName()));
+
+    }
+    
+    @Test
+    public void negativTestEditPerson() {
+        PersonDTO newPerson = new PersonDTO(null, null, "Vol.2",new Address ("X","Y","Z"));
+        newPerson.setId(p2.getId());
+        given()
+                .contentType("application/json")
+                .body(GSON.toJson(newPerson))//works also for PersonDTO object not only for JSON
+                .when()
+                .put("/person/{id}", p2.getId())
+                .then()
+                .body("message", equalTo("First Name and/or Last Name is missing"))
+                .body("code", equalTo(400));
 
     }
 

@@ -21,7 +21,8 @@ public class MissingInputExceptionMapper implements ExceptionMapper<MissingInput
     public Response toResponse(MissingInputException exception) {
        
     Logger.getLogger(MissingInputException.class.getName())
-            .log(Level.INFO, "Input missing", exception);
+          // .log(Level.INFO, "Input missing", exception)
+            ;
     ExceptionDTO ex = new ExceptionDTO(400, exception.getMessage());
     return Response
             .status(400)

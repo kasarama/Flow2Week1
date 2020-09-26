@@ -19,13 +19,16 @@ public class PersonDTO {
     private String lName;
     private String phone; 
     private int id;
-    private Address address;
+   // private Address address;
+    private String street;
+    private String city;
 
     public PersonDTO(String fName, String lName, String phone, Address addres) {
         this.fName = fName;
         this.lName = lName;
         this.phone = phone;
-        this.address = addres;
+        this.street = addres.getStreet();
+        this.city = addres.getCity();
     }
     
     public PersonDTO(Person person){
@@ -33,7 +36,8 @@ public class PersonDTO {
         this.lName=person.getLastName();
         this.phone=person.getPhone();
         this.id=person.getId();
-        this.address=person.getAddress();
+        this.street = person.getAddress().getStreet();
+        this.city = person.getAddress().getCity();
     }
 
     public String getfName() {
@@ -68,12 +72,10 @@ public class PersonDTO {
         this.id = id;
     }
 
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
+    
+    @Override
+    public String toString() {
+        return "PersonDTO{" + "fName=" + fName + ", lName=" + lName + ", phone=" + phone + ", id=" + id + ", address=" + city + " "+street+ '}';
     }
     
       
