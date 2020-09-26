@@ -50,11 +50,20 @@ public class PersonResource {
     @Produces({MediaType.APPLICATION_JSON})
     public String demo() throws Exception {
       
+        
+        return "{\"msg\":\"Person Resources\"}";
+        
+    }
+
+    @Path("servererr")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public String serverError() throws Exception {
+      
         int[] numb ={1,2,3};
         return "{\"msg\":\"Person Resources "+numb[4]+"bb\"}";
         
     }
-
     @Path("findbyid/{id}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)

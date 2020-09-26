@@ -67,7 +67,7 @@ public class PersonFacadeTest {
     public void testAddPerson() {
 
         String fName="Patrick";
-        PersonDTO result = facade.addPerson(fName, "last name", "789789",a1);
+        PersonDTO result = facade.addPerson(fName, "last name", "789789",a3);
         assertTrue(result.getfName().equals(fName));
     }
 

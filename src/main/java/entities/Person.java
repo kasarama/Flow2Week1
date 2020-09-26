@@ -56,9 +56,13 @@ public class Person implements Serializable {
 
     public void setAddress(Address address) {        
         this.address = address;       
+      /*  
+        when this statement is used, toJson() can nt be called with PersonDTO 
+        WHY??
         if (address!=null){           
             address.setPerson(this);
         }
+    */
     }
 
     public int getId() {

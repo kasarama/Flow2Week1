@@ -44,8 +44,6 @@ public class PersonFacade implements IPersonFacade {
         } finally {
             em.close();
         }
-        System.out.println("In facade aa");
-        System.out.println("In facade: fName: "+p.getFirstName()+"person on addr: "+p.getAddress().getPerson().getFirstName());
         return new PersonDTO(p);
     }
 

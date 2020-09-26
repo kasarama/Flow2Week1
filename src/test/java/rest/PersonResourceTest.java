@@ -101,7 +101,7 @@ public class PersonResourceTest {
                 .then()
                 .statusCode(200);
     }
-
+*/
     
     @Test
     public void testDemo() throws Exception {
@@ -112,7 +112,19 @@ public class PersonResourceTest {
                 .statusCode(HttpStatus.OK_200.getStatusCode())
                 .body("msg", equalTo("Person Resources"));
     }
-*/
+    
+    
+    @Test
+    public void testServerError() throws Exception {
+        given()
+                .contentType("text/html")
+                .get("/person/servererr").then()
+                .assertThat()
+                .statusCode(HttpStatus.INTERNAL_SERVER_ERROR_500.getStatusCode())
+                .body("message", equalTo("Internal Server Problem. We are sorry for the inconvenience"));
+    }
+
+    
     @Test
     public void testGetPersonByID() throws Exception {
         given()
@@ -121,6 +133,18 @@ public class PersonResourceTest {
                 .assertThat()
                 .statusCode(HttpStatus.OK_200.getStatusCode())
                 .body("id", equalTo(p2.getId()));
+    }
+    
+    @Test
+    public void NegativTestGetPersonByID() throws Exception {
+        int id = 20;
+        given()
+                .contentType("application/json")
+                .get("/person/findbyid/" + id).then()
+                .assertThat()
+                .statusCode(HttpStatus.NOT_FOUND_404.getStatusCode())
+                .body("message", equalTo("No person with provided id: "+id+" found"))
+                .body("code", equalTo(404));
     }
 
     @Test
