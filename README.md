@@ -1,5 +1,7 @@
-Status: 
+Status:
+
 On master :
+
 To entities with one to one relation. When relatin is bi-directional throuht if statement:      
      
         public void setAddress(Address address) {        
