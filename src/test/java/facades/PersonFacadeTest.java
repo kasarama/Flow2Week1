@@ -10,6 +10,7 @@ import dto.PersonDTO;
 import dto.PersonsDTO;
 import entities.Person;
 import entities.Address;
+import exceptions.MissingInputException;
 import exceptions.PersonNotFoundException;
 import java.util.Date;
 import javax.persistence.EntityManager;
@@ -64,7 +65,7 @@ public class PersonFacadeTest {
     }
 
     @Test
-    public void testAddPerson() {
+    public void testAddPerson() throws MissingInputException {
 
         String fName="Patrick";
         PersonDTO result = facade.addPerson(fName, "last name", "789789",a3);

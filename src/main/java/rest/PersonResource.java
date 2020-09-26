@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import dto.PersonDTO;
 import dto.PersonsDTO;
+import exceptions.MissingInputException;
 import exceptions.PersonNotFoundException;
 import facades.PersonFacade;
 import javax.persistence.EntityManagerFactory;
@@ -92,7 +93,7 @@ public class PersonResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public String addNewPerson(String PersonJson) {
+    public String addNewPerson(String PersonJson) throws MissingInputException {
         PersonDTO newPerson = GSON.fromJson(PersonJson, PersonDTO.class);
         System.out.println("1");
         PersonDTO addedPerson = FACADE.addPerson(newPerson.getfName(), newPerson.getlName(), newPerson.getPhone(), newPerson.getAddress());

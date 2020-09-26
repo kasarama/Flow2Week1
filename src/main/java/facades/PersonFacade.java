@@ -4,11 +4,11 @@ import dto.PersonDTO;
 import dto.PersonsDTO;
 import entities.Address;
 import entities.Person;
+import exceptions.MissingInputException;
 import exceptions.PersonNotFoundException;
 import java.util.Date;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
 /**
@@ -32,7 +32,10 @@ public class PersonFacade implements IPersonFacade {
     }
 
     @Override
-    public PersonDTO addPerson(String fName, String lName, String phone, Address address) {
+    public PersonDTO addPerson(String fName, String lName, String phone, Address address) throws MissingInputException {
+        if(fName==null || lName==null){
+            throw new MissingInputException ("First Name and/or Last Name is missing");
+        }
         EntityManager em = emf.createEntityManager();
         Person p = new Person(fName, lName, phone, new Date(), new Date());
         p.setAddress(address);
