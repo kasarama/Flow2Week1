@@ -18,4 +18,6 @@ On master :
  - Implementation of two custom exceptions with the corresponding negativ tests.
     
     
+ - JPA exercisezes from 22.09.2020 solved
+    
 
